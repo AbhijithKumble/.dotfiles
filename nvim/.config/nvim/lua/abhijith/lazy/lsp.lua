@@ -1,5 +1,5 @@
 return {
-    --- Uncomment the two plugins below if you want to manage the language 
+    --- Uncomment the two plugins below if you want to manage the language
     --servers from neovim
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -16,7 +16,7 @@ return {
         "j-hui/fidget.nvim",
     },
 
-     config = function()
+    config = function()
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
@@ -29,12 +29,16 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+                "yq",
                 "lua_ls",
                 "clangd",
+                "gopls",
+                "lua-language-server lua_ls",
+                "tailwindcss-language-server",
+                "typescript-language-server"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
@@ -46,7 +50,7 @@ return {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
-				    runtime = { version = "Lua 5.1" },
+                                runtime = { version = "Lua 5.1" },
                                 diagnostics = {
                                     globals = { "vim", "it", "describe", "before_each", "after_each" },
                                 }
