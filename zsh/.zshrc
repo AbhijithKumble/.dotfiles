@@ -102,6 +102,8 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.zsh_profile
 
+export TERM="screen-256color"
+
 #android studio
 
 export ANDROID_HOME="/home/abhi/Android/Sdk"
