@@ -1,3 +1,4 @@
 #!/usr/bin/env zsh
 
 stow nvim
+stow i3 

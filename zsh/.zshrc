@@ -73,6 +73,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # User configuration
 
@@ -102,14 +103,24 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.zsh_profile
 
-export TERM="screen-256color"
+#go 
+
+export GOPATH="$HOME/go/bin"
+export PATH="$GOPATH":"$PATH"
 
 #android studio
 
 export ANDROID_HOME="/home/abhi/Android/Sdk"
 export PATH="$ANDROID_HOME:$PATH"
+export PATH="$ANDROID_HOME/emulator:$PATH"
 
 #firestore android
-
 export PATH="$HOME/.pub-cache/bin:$PATH"
 
+# pnpm
+export PNPM_HOME="/home/abhi/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

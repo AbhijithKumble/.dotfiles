@@ -1,4 +1,17 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
-
 alias vi="nvim"
+
+#export GOPATH="$HOME/go"
+
+##export GOPATH="$HOME/go"
+##
+##addPathToFront GOPATH
+##
+##
+##addPathToFront() {
+##    [[ -z $]]
+##}
+##
+
+
