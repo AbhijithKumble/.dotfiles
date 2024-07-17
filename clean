@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+stow -D nvim
+stow -D i3 
+stow -D tmux 
+stow -D zsh 
+stow -D bin
