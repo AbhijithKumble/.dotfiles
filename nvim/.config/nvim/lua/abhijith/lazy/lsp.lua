@@ -29,13 +29,8 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "yq",
                 "lua_ls",
                 "clangd",
-                "gopls",
-                "lua-language-server lua_ls",
-                "tailwindcss-language-server",
-                "typescript-language-server"
             },
             handlers = {
                 function(server_name) -- default handler (optional)

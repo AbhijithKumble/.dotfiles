@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 --go outside of editor to the directory
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
