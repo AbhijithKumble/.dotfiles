@@ -11,5 +11,5 @@ cd .dotfiles
 
 ```bash 
 cd .dotfiles
-./clean #to install the .dotfiles
+./clean #to delete the configs
 ```
