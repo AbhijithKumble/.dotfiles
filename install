@@ -1,17 +1,11 @@
 #!/usr/bin/env zsh
 
-stow nvim
-stow i3 
-stow tmux 
-stow zsh 
-stow bin
-###!/usr/bin/env zsh
+export STOW_DIR="$HOME/"
 
-# Define an array with the directory names
-#directories=("nvim" "i3" "tmux" "zsh" "bin")
-#
+directories=("nvim" "i3" "tmux" "zsh" "bin")
+
 ## Loop through each directory and run the stow command
-#for dir in $directories; do
-#  stow $dir
-#done
+for dir in $directories; do
+  stow $dir
+done
 #
