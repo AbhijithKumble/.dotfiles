@@ -5,5 +5,5 @@ return {
         name = planery
     },
 
-        "eandrju/cellular-automaton.nvim",
+    "eandrju/cellular-automaton.nvim",
 }
