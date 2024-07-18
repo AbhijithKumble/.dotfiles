@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-export STOW_DIR="$HOME/"
-
-directories=("nvim" "i3" "tmux" "zsh" "bin")
-
-## Loop through each directory and run the stow command
-for dir in $directories; do
-  stow $dir
+pushd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    echo "stow $folder"
+    stow -D $folder
+    stow $folder
 done
-#
+popd
+
