@@ -31,6 +31,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "clangd",
+                "gopls"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
