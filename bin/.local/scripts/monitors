@@ -1,0 +1,5 @@
+##!/usr/bin/env bash
+
+# Count the number of connected monitors
+monitors=$(xrandr --query | grep " connected" | wc -l)
+

@@ -32,7 +32,8 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec /usr/bin/kitty
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -217,5 +218,12 @@ bindsym $mod+Shift+period exec systemctl suspend
 exec xinput set-prop "ELAN078D:00 04F3:315D Touchpad" "libinput Tapping Enabled" 1
 exec xinput set-prop "ELAN078D:00 04F3:315D Touchpad" "libinput Natural Scrolling Enabled" 1
 
+# monitors
+#exec --no-startup-id  ~/.local/scripts/monitor
+
 ## polybar
 #exec_always --no-startup-id $HOME/.config/polybar/launch
+
+## Fractional scaling 
+#exec --no-startup-id xrandr --output <DISPLAY> --scale 1.25x1.25
+
