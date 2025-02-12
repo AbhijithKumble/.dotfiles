@@ -109,9 +109,9 @@ export GOPATH="$HOME/go/bin"
 export PATH="$GOPATH":"$PATH"
 
 #android studio
-
 export ANDROID_HOME="/home/abhi/Android/Sdk"
 export PATH="$ANDROID_HOME:$PATH"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 
 #firestore android

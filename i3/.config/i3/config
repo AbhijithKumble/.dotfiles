@@ -227,3 +227,19 @@ exec xinput set-prop "ELAN078D:00 04F3:315D Touchpad" "libinput Natural Scrollin
 ## Fractional scaling 
 #exec --no-startup-id xrandr --output <DISPLAY> --scale 1.25x1.25
 
+## battery warning
+exec --no-startup-id i3-battery-popup -n -D -L 20 -l 10
+
+## picom compositor
+exec --no-startup-id picom 
+
+## wallpaper
+exec feh --bg-fill ~/wallpapers/anime-landscape.webp
+
+## Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshots/$(date).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshots/$(date).png"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshots/$(date).png"
+
+## wallpaper
+
