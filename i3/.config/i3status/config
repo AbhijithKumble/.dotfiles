@@ -25,6 +25,7 @@ disk "/" {
 
 battery all {
         format = "%status %percentage %remaining"
+        integer_battery_capacity = true
         format_down = "No battery"
         status_chr = "⚡ CHR"
         status_bat = "🔋 BAT"
@@ -45,6 +46,6 @@ ethernet _first_ {
 }
 
 tztime local {
-  format = "%Y-%m-%d %I:%M %p"
+  format = "%Y-%m-%d %a %I:%M %p"
 }
 
