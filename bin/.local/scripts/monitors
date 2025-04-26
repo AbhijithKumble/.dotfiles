@@ -1,5 +1,41 @@
-##!/usr/bin/env bash
+#!/usr/bin/env bash
 
-# Count the number of connected monitors
-monitors=$(xrandr --query | grep " connected" | wc -l)
+# --- Configuration ---
+# !!! IMPORTANT: Check your 'xrandr' output and adjust these names !!!
+LAPTOP_DISPLAY="eDP-1"       # Common name for laptop screen (e.g., eDP-1, LVDS-1)
+EXTERNAL_DISPLAY="HDMI-A-0"  # External monitor name from your 'xrandr' output
+EXTERNAL_MODE="1920x1080"   # Optional: Specify mode, or use --auto below
+# --- End Configuration ---
 
+echo "Select display configuration:"
+echo "  1: Laptop display only"
+echo "  2: Laptop + External Monitor ($EXTERNAL_DISPLAY)"
+read -p "Enter option (1 or 2): " option
+
+case "$option" in
+  1)
+    echo "Configuring for Laptop display only..."
+    # Turn off the external display and ensure the laptop display is on and primary
+    xrandr --output "$EXTERNAL_DISPLAY" --off --output "$LAPTOP_DISPLAY" --auto --primary
+    echo "External display ($EXTERNAL_DISPLAY) should now be off."
+    ;;
+
+  2)
+    echo "Configuring for Laptop + External Monitor..."
+    # Ensure laptop display is on and primary
+    # Then, turn on the external display, set its mode (or use --auto), and position it (e.g., right of laptop)
+    # Using --auto for mode is often safer if you don't need a specific resolution forced
+    xrandr --output "$EXTERNAL_DISPLAY" --mode "$EXTERNAL_MODE"  --pos 1920x0 --output "$LAPTOP_DISPLAY" --primary --mode "$EXTERNAL_MODE" --pos 0x0 
+    # Or, to automatically determine the best mode for the external display:
+    # xrandr --output "$LAPTOP_DISPLAY" --auto --primary --output "$EXTERNAL_DISPLAY" --auto --right-of "$LAPTOP_DISPLAY"
+    echo "External display ($EXTERNAL_DISPLAY) should now be active to the right of $LAPTOP_DISPLAY."
+    ;;
+
+  *) # Default case for invalid input
+    echo "Invalid option: '$option'. Please enter 1 or 2." >&2 # Send error message to stderr
+    exit 1 # Exit with a non-zero status to indicate an error
+    ;;
+esac
+
+echo "Display configuration attempt finished."
+exit 0 # Exit successfully
