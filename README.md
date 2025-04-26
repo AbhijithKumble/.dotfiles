@@ -132,12 +132,6 @@ The following tools are required to use this setup:
 
 ---
 
-## 📜 License
-
-This repository is available under the [MIT License](LICENSE).
-
----
-
 ## 🤝 Acknowledgments
 
 Special thanks to the open-source community for creating amazing tools and providing inspiration for this setup. Feel free to fork this repository and customize it to suit your needs. Contributions are welcome!
