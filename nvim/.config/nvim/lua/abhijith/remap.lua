@@ -32,10 +32,15 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 
-
 -- learn it
 --vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+-- get all the errors in quick fix list
+vim.keymap.set('n', '<leader>q', function()
+  vim.diagnostic.setqflist()
+  vim.cmd("copen")
+end)
 
 -- try to use it
 

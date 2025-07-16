@@ -1,41 +1,45 @@
 #!/usr/bin/env bash
 
 # --- Configuration ---
-# !!! IMPORTANT: Check your 'xrandr' output and adjust these names !!!
-LAPTOP_DISPLAY="eDP-1"       # Common name for laptop screen (e.g., eDP-1, LVDS-1)
-EXTERNAL_DISPLAY="HDMI-A-0"  # External monitor name from your 'xrandr' output
-EXTERNAL_MODE="1920x1080"   # Optional: Specify mode, or use --auto below
+# Adjust these based on your actual xrandr output
+LAPTOP_DISPLAY="eDP-1"
+EXTERNAL_DISPLAY="HDMI-A-0"
+EXTERNAL_MODE="1920x1080"
 # --- End Configuration ---
 
-echo "Select display configuration:"
-echo "  1: Laptop display only"
-echo "  2: Laptop + External Monitor ($EXTERNAL_DISPLAY)"
-read -p "Enter option (1 or 2): " option
+read -p "configure your external display \n 1.laptop 2.mirror 3.extend --args l, r, u, d" $option $orientation  
+
+## this works for extending
+## xrandr --output HDMI-A-0 --mode 1920x1080 --pos 1920x0 --output eDP-1 --primary --mode 1920x1080 --pos 0x0
+## but only for laptop left and monitor right
+
 
 case "$option" in
   1)
     echo "Configuring for Laptop display only..."
-    # Turn off the external display and ensure the laptop display is on and primary
-    xrandr --output "$EXTERNAL_DISPLAY" --off --output "$LAPTOP_DISPLAY" --auto --primary
+    xrandr --output "$EXTERNAL_DISPLAY" --off \
+           --output "$LAPTOP_DISPLAY" --auto --primary
     echo "External display ($EXTERNAL_DISPLAY) should now be off."
     ;;
 
   2)
-    echo "Configuring for Laptop + External Monitor..."
-    # Ensure laptop display is on and primary
-    # Then, turn on the external display, set its mode (or use --auto), and position it (e.g., right of laptop)
-    # Using --auto for mode is often safer if you don't need a specific resolution forced
-    xrandr --output "$EXTERNAL_DISPLAY" --mode "$EXTERNAL_MODE"  --pos 1920x0 --output "$LAPTOP_DISPLAY" --primary --mode "$EXTERNAL_MODE" --pos 0x0 
-    # Or, to automatically determine the best mode for the external display:
-    # xrandr --output "$LAPTOP_DISPLAY" --auto --primary --output "$EXTERNAL_DISPLAY" --auto --right-of "$LAPTOP_DISPLAY"
-    echo "External display ($EXTERNAL_DISPLAY) should now be active to the right of $LAPTOP_DISPLAY."
+    echo "Configuring Laptop display for mirroring"
+    ##xrandr --output $EXTERNAL_DISPLAY --mode 1920x1080 --pos 1920x0 --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --pos 0x0
+    echo "Done"
     ;;
 
-  *) # Default case for invalid input
-    echo "Invalid option: '$option'. Please enter 1 or 2." >&2 # Send error message to stderr
-    exit 1 # Exit with a non-zero status to indicate an error
+  3)
+    echo "Configuring for Laptop + External Monitor..."
+    xrandr --output $EXTERNAL_DISPLAY --mode 1920x1080 --pos 1920x0 --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --pos 0x0
+    echo "External display ($EXTERNAL_DISPLAY) configured."
+    ;;
+
+  *)
+    echo "Invalid option: '$option'. Please enter 1 or 2." >&2
+    exit 1
     ;;
 esac
 
 echo "Display configuration attempt finished."
-exit 0 # Exit successfully
+exit 0
+
