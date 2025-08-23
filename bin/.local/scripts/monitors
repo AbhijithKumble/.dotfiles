@@ -1,5 +1,45 @@
-##!/usr/bin/env bash
+#!/usr/bin/env bash
 
-# Count the number of connected monitors
-monitors=$(xrandr --query | grep " connected" | wc -l)
+# --- Configuration ---
+# Adjust these based on your actual xrandr output
+LAPTOP_DISPLAY="eDP-1"
+EXTERNAL_DISPLAY="HDMI-A-0"
+EXTERNAL_MODE="1920x1080"
+# --- End Configuration ---
+
+read -p "configure your external display \n 1.laptop 2.mirror 3.extend --args l, r, u, d" $option $orientation  
+
+## this works for extending
+## xrandr --output HDMI-A-0 --mode 1920x1080 --pos 1920x0 --output eDP-1 --primary --mode 1920x1080 --pos 0x0
+## but only for laptop left and monitor right
+
+
+case "$option" in
+  1)
+    echo "Configuring for Laptop display only..."
+    xrandr --output "$EXTERNAL_DISPLAY" --off \
+           --output "$LAPTOP_DISPLAY" --auto --primary
+    echo "External display ($EXTERNAL_DISPLAY) should now be off."
+    ;;
+
+  2)
+    echo "Configuring Laptop display for mirroring"
+    ##xrandr --output $EXTERNAL_DISPLAY --mode 1920x1080 --pos 1920x0 --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --pos 0x0
+    echo "Done"
+    ;;
+
+  3)
+    echo "Configuring for Laptop + External Monitor..."
+    xrandr --output $EXTERNAL_DISPLAY --mode 1920x1080 --pos 1920x0 --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --pos 0x0
+    echo "External display ($EXTERNAL_DISPLAY) configured."
+    ;;
+
+  *)
+    echo "Invalid option: '$option'. Please enter 1 or 2." >&2
+    exit 1
+    ;;
+esac
+
+echo "Display configuration attempt finished."
+exit 0
 

@@ -14,4 +14,7 @@ alias vi="nvim"
 ##}
 ##
 
-
+export LOCAL_SCRIPTS=$HOME/.local/scripts
+export PATH="$LOCAL_SCRIPTS":"$PATH"
+export LOCAL_BIN=$HOME/.local/bin
+export PATH="$LOCAL_BIN":"$PATH"

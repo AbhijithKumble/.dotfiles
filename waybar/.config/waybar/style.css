@@ -1,0 +1,103 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: JetBrains Mono Nerd Font, monospace;
+  font-size: 15px;
+  color: #e5e9f0;
+}
+
+/* Main bar */
+window#waybar {
+  background-color: #0e1116;
+  color: #e5e9f0;
+}
+
+/* Workspaces container */
+#workspaces {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+/* Workspace buttons */
+#workspaces button {
+  all: unset;
+  padding: 6px 10px;
+  margin: 0 1px;
+  color: #e5e9f0;
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+/* Hover effect */
+#workspaces button:hover {
+  background-color: #1f2329;
+  color: #0e1116;
+}
+
+/* Focused workspace - Blue highlight */
+#workspaces button.focused {
+  background-color: #4c7899;
+  color: #0e1116;
+  font-weight: bold;
+}
+
+/* Urgent workspace */
+#workspaces button.urgent {
+  background-color: #ff6c6b;
+  color: #0e1116;
+}
+
+/* Modules (CPU, battery, etc.) */
+#cpu,
+#memory,
+#custom-kernel,
+#custom-power,
+#custom-diskfree,
+#battery,
+#backlight,
+#wireplumber,
+#network,
+#clock,
+#language,
+#pulseaudio,
+#tray {
+  padding: 4px 8px;
+  margin: 2px;
+  background-color: #1a1d23;
+  border-radius: 4px;
+  color: #eceff4;
+}
+
+/* Battery states */
+#battery.charging {
+  background-color: #4da3ff;
+  color: #0e1116;
+}
+
+#battery.critical {
+  background-color: #ff6c6b;
+  color: #0e1116;
+}
+
+/* Clock spacing */
+#clock {
+  padding-right: 10px;
+}
+
+#tray {
+    background: #0e1116; /* or your Waybar background */
+    color: #c5c8c6;      /* text color */
+}
+
+/* Tooltip styling */
+tooltip, tooltip * {
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #1a1d23;
+  color: #c5c8c6;
+}
+
+tooltip label {
+  background-color: transparent;
+}
