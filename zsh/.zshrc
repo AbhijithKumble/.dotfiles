@@ -1,8 +1,25 @@
+# zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
+# Qt Wayland support for Sway
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+# Wayland session variables
+export XDG_SESSION_TYPE=wayland
+export GDK_BACKEND=wayland
+
+# Optional: fallback for some Qt apps
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_DISABLE_COMPFIX="true"          # skips compaudit / security scans
+DISABLE_AUTO_UPDATE="true"          # skips OMZ update check
+DISABLE_MAGIC_FUNCTIONS="true"      # optional, tiny win if you don't need URL magic
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -75,6 +92,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -109,13 +127,13 @@ export GOPATH="$HOME/go/bin"
 export PATH="$GOPATH":"$PATH"
 
 #android studio
-export ANDROID_HOME="/home/abhi/Android/Sdk"
-export PATH="$ANDROID_HOME:$PATH"
-export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH="$ANDROID_HOME/emulator:$PATH"
+#export ANDROID_HOME="/home/abhi/Android/Sdk"
+#export PATH="$ANDROID_HOME:$PATH"
+#export PATH="$ANDROID_HOME/platform-tools:$PATH"
+#export PATH="$ANDROID_HOME/emulator:$PATH"
 
 #firestore android
-export PATH="$HOME/.pub-cache/bin:$PATH"
+#export PATH="$HOME/.pub-cache/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/home/abhi/.local/share/pnpm"
@@ -125,4 +143,36 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-. "$HOME/.local/bin/env"
+source "$HOME/.local/bin/env"
+#source ~/ros2/install/setup.zsh
+#source ~/ros2_external_packages/install/setup.zsh
+#source ~/gazebo/install/setup.zsh
+ros2() {
+    # Optional: show feedback only once
+    # echo "→ Loading ROS 2 + workspaces..."
+
+    # Remove this wrapper function so future calls are fast/direct
+    unfunction "$0"
+
+    # Order matters: base → main workspace → external → special (gazebo)
+    # 1. Base distro (change 'jazzy' / 'humble' / 'rolling' to yours)
+    [[ -f /opt/ros/jazzy/setup.zsh ]] && source /opt/ros/jazzy/setup.zsh
+
+    # 2. Your main development workspace
+    [[ -f ~/ros2/install/setup.zsh ]] && source ~/ros2/install/setup.zsh
+
+    # 3. External/third-party packages workspace
+    [[ -f ~/ros2_external_packages/install/setup.zsh ]] && source ~/ros2_external_packages/install/setup.zsh
+
+    # 4. Gazebo (usually needs to come last so it can override what needed)
+    [[ -f ~/gazebo/install/setup.zsh ]] && source ~/gazebo/install/setup.zsh
+
+    # Now really execute the command you typed
+    command ros2 "$@"
+}
+
+# Make common commands trigger the lazy load
+alias srcros='ros2'
+export QT_QPA_PLATFORM=xcb
+
+#zprof

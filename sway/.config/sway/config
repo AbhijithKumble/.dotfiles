@@ -29,6 +29,7 @@ bindsym $mod+shift+period exec swaylock -f -c 000000
 input "1267:12637:ELAN078D:00_04F3:315D_Touchpad" {
     tap enabled
     natural_scroll enabled
+    drag_lock disabled 
 }
 
 # Start a terminal
@@ -198,11 +199,29 @@ bindsym Shift+Print exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/$(date +
 #    }
 #}
 
+## -- useful to mirror my screen on projector iste seminar hall 
+#output eDP-1 resolution 1280x720 position 0,0
+#output HDMI-A-1 resolution 1280x720 position 0,0
+
+# GTK theme setup
+set $gtk_theme Adwaita:dark
+set $icon_theme Adwaita
+exec_always {
+    export GTK_THEME=$gtk_theme
+    export GTK_ICON_THEME=$icon_theme
+    export XDG_CURRENT_DESKTOP=sway
+    export XDG_SESSION_TYPE=wayland
+}
+
 exec_always --no-startup-id env GTK_THEME=Adwaita:dark nm-applet --indicator
+exec_always --no-startup-id blueman-applet
+#exec_always /usr/libexec/polkit-gnome-authentication-agent-1
 
 bar {
   swaybar_command waybar
 }
 
+
 include /etc/sway/config.d/*
+
 

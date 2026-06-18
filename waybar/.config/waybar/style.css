@@ -3,7 +3,6 @@
   border-radius: 0;
   font-family: JetBrains Mono Nerd Font, monospace;
   font-size: 15px;
-  color: #e5e9f0;
 }
 
 /* Main bar */
@@ -32,13 +31,13 @@ window#waybar {
 /* Hover effect */
 #workspaces button:hover {
   background-color: #1f2329;
-  color: #0e1116;
+  color: #e5e9f0;
 }
 
 /* Focused workspace - Blue highlight */
 #workspaces button.focused {
   background-color: #4c7899;
-  color: #0e1116;
+  color: #e5e9f0;
   font-weight: bold;
 }
 

@@ -60,5 +60,5 @@
         "nospacing": 1,
         "on-click": "pavucontrol",
         "tooltip": false
-    }
+    },
 }
