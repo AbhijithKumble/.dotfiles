@@ -1,3 +1,5 @@
+return {}
+--[[
 return {
     {
         "folke/trouble.nvim",
@@ -21,3 +23,4 @@ return {
         end
     },
 }
+]]--

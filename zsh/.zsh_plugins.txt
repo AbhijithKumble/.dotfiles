@@ -1,0 +1,16 @@
+# 1. Antidote's official OMZ dependency bridge (must be first)
+getantidote/use-omz
+
+# 2. Load OMZ core libraries (includes async_prompt.zsh, git.zsh, theme helpers)
+ohmyzsh/ohmyzsh path:lib
+
+# 3. Git aliases & functions
+ohmyzsh/ohmyzsh path:plugins/git
+
+# 4. Classic OMZ prompt (current directory + git branch/dirty status)
+ohmyzsh/ohmyzsh path:themes/robbyrussell.zsh-theme
+
+# 5. Completions, autosuggestions & syntax highlighting
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
