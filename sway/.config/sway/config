@@ -16,7 +16,7 @@ set $term kitty
 set $menu sh -c 'wofi --show drun --insensitive | xargs -I{} search {}' 
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Downloads/wallpaper/anime-landscape.webp fill
+exec_always sh -c 'img=$(find "$HOME/.dotfiles/wallpapers" -maxdepth 1 -type f | sort | head -n 1); [ -n "$img" ] && swaymsg "output * bg \"$img\" fill"'
 
 smart_borders on
 default_border pixel 3

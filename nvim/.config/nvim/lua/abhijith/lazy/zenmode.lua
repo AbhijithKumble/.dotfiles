@@ -1,3 +1,4 @@
+--[[
 return {
     "folke/zen-mode.nvim",
     config = function()
@@ -32,5 +33,5 @@ return {
         end)
     end
 }
-
-
+]]--
+return {}

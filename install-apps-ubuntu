@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#==========================================
+# System Update
+#==========================================
+echo "Updating system packages..."
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo apt clean
+
+#==========================================
+# Install Essential Packages
+#==========================================
+echo "Installing development tools and utilities..."
+sudo apt install -y \
+    curl \
+    git \
+    zsh \
+    build-essential \
+    cargo \
+    unzip \
+    zip \
+    software-properties-common
+
+#==========================================
+# Install Terminal & Development Tools
+#==========================================
+echo "Installing terminal and development applications..."
+# Pull Neovim 0.10+ from official PPA (Ubuntu 24.04 default repo is 0.9.5)
+sudo add-apt-repository -y ppa:neovim-ppa/unstable
+sudo apt update
+
+sudo apt install -y \
+    tmux \
+    neovim \
+    kitty \
+    stow \
+    fzf \
+    ripgrep \
+    wofi
+
+#==========================================
+# Install Sway & Wayland Utilities
+#==========================================
+echo "Installing Sway and Wayland utilities..."
+sudo apt install -y \
+    sway \
+    waybar \
+    wl-clipboard \
+    xwayland
+
+#==========================================
+# Install Cargo Binstall
+#==========================================
+echo "Installing cargo-binstall..."
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+
+# Add Cargo binaries to PATH idempotently
+CARGO_PATH_LINE='export PATH="$HOME/.cargo/bin:$PATH"'
+if ! grep -qxF "$CARGO_PATH_LINE" "$HOME/.zshrc" 2>/dev/null; then
+    echo "$CARGO_PATH_LINE" >> "$HOME/.zshrc"
+fi
+export PATH="$HOME/.cargo/bin:$PATH"
+
+#==========================================
+# Install Tree-sitter CLI
+#==========================================
+echo "Installing tree-sitter-cli..."
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+
+case "${OS}-${ARCH}" in
+    Linux-x86_64)   TS_TARGET="tree-sitter-linux-x64.gz" ;;
+    Linux-aarch64)  TS_TARGET="tree-sitter-linux-arm64.gz" ;;
+    Darwin-arm64)   TS_TARGET="tree-sitter-macos-arm64.gz" ;;
+    Darwin-x86_64)  TS_TARGET="tree-sitter-macos-x64.gz" ;;
+    *)
+        echo "Unsupported platform: ${OS}-${ARCH}"
+        exit 1
+        ;;
+esac
+
+mkdir -p "$HOME/.cargo/bin"
+curl -fL "https://github.com/tree-sitter/tree-sitter/releases/latest/download/${TS_TARGET}" | gunzip > "$HOME/.cargo/bin/tree-sitter"
+chmod +x "$HOME/.cargo/bin/tree-sitter"
+
+#==========================================
+# Final Verification
+#==========================================
+echo ""
+echo "=========================================="
+echo " INSTALLATION COMPLETED!"
+echo "=========================================="
+echo "Installed versions:"
+echo "  git:            $(git --version)"
+echo "  cargo:          $(cargo --version)"
+echo "  cargo-binstall: $(cargo-binstall -V)"
+echo "  tree-sitter:    $(tree-sitter --version)"
+echo "  nvim:           $(nvim --version | head -n 1)"
+echo "  kitty:          $(kitty --version)"
+echo ""
+echo "Development environment setup complete!"
+echo "Run 'chsh -s \$(which zsh)' and log out/in to apply Zsh and Sway/Wayland changes."

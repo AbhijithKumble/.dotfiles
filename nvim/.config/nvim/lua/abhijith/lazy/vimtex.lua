@@ -1,3 +1,5 @@
+return {}
+--[[
 return {
   "lervag/vimtex",
   dependencies = {
@@ -61,4 +63,4 @@ return {
     })
   end,
 }
-
+]]--
